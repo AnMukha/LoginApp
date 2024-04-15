@@ -1,0 +1,6 @@
+@LoginApp.Services.Identity_HostAddress = http://localhost:5064
+
+GET {{LoginApp.Services.Identity_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

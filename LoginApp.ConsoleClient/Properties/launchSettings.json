@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LoginApp.ConsoleClient": {
+      "commandName": "Project",
+      "commandLineArgs": "http://localhost:5550/"
+    }
+  }
+}

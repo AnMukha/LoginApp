@@ -1,0 +1,49 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5551
+        }
+      ],
+      "UpstreamPathTemplate": "/api/login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/post-login/logins",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5552
+        }
+      ],
+      "UpstreamPathTemplate": "/api/post-login/logins",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    }
+
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5550"
+  },
+  "SwaggerEndPoints": [
+    {
+      "Key": "loginapi",
+      "Config": [
+        {
+          "Name": "Login API",
+          "Version": "v1",
+          "Url": "http://localhost:5550/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
