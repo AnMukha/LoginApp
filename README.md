@@ -4,8 +4,7 @@ This application includes a console client capable of logging into a microservic
 
 ### Installation and Running
 
-#### Clone the repository to your local machine:
-
+Clone the repository to your local machine:
 git clone https://github.com/AnMukha/LoginApp
 
 #### Navigate to the directory of the project:
