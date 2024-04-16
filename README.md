@@ -62,4 +62,4 @@ All communications, including the client-GateWay, work via http (didn’t have t
 User authentication is verified on GateWay, the network behind GateWay is considered secure and service communications are not protected.
 Error handling in services is organized by adding a new item to midleware.
 
-The LoginApp.RestServicesCore project was also created to create a common basis for describing Rest services, but this project just implements the creation of a service without the capabilities of a flexible builder. There was not enough time to create a full-fledged framework supporting the concern list.
+The LoginApp.RestServicesCore project was also added to create a common basis for describing Rest services, but this project just implements the creation of a service without the necessary capabilities of a flexible builder. There was not enough time to create a full-fledged framework supporting wide list of concerns.
