@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 Console.WriteLine("Hello, World!");
 
 var optionsBuilder = new DbContextOptionsBuilder<IdentityDbContext>();
-optionsBuilder.UseNpgsql("Host=localhost:5432;Database=LoginApp;Username=postgres;Password=Admin1#");
+optionsBuilder.UseNpgsql(args[0]);
 
 using (var context = new IdentityDbContext(optionsBuilder.Options))
 {
