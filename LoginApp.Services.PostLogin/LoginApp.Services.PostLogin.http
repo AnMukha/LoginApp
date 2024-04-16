@@ -1,6 +1,0 @@
-@LoginApp.Services.PostLogin_HostAddress = http://localhost:5283
-
-GET {{LoginApp.Services.PostLogin_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

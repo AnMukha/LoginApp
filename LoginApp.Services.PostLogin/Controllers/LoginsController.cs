@@ -12,12 +12,12 @@ namespace LoginApp.Services.PostLogin.Controllers
         {
         }
 
-        const string consoleAppDescriptor = "console";
+        const string consoleAppIdentifier = "console";
 
         [HttpPost]        
         public Task<IResult> Post([FromBody] ClientInfo clientInfo)
         {
-            if (clientInfo.ClientType == consoleAppDescriptor)
+            if (clientInfo.ClientType == consoleAppIdentifier)
             {
                 Console.WriteLine("------------------------- Logined from console client ------------------------------");
                 // TODO ... some async code to store login info

@@ -16,13 +16,22 @@ namespace LoginApp.ConsoleClient.Utilities
         {            
             Console.WriteLine("Login successful");
             Console.WriteLine("User profile:");
-            Console.WriteLine(loginResponse!.UserName);
-            Console.WriteLine(loginResponse!.Email);
+            Console.WriteLine($"User name: {loginResponse!.UserName}");
+            Console.WriteLine($"Email: {loginResponse!.Email}");
         }
         public static void DisplayLoginFailure()
         {
             Console.WriteLine("Failed to authenticate.");
         }
+        public static void DisplayLoginError(string errorMessage)
+        {
+            Console.WriteLine("Failed to authenticate.");
+            if (errorMessage != null)
+            {
+                Console.WriteLine("Error: " + errorMessage);
+            }
+        }
+
         public static void DisplayPostLoginSuccess()
         {
             Console.WriteLine("Post login information successfully sent.");

@@ -4,19 +4,13 @@ using System.Text;
 
 namespace LoginApp.ConsoleClient.Services
 {
-    public class AuthenticationService
+    public class AuthenticationService(HttpClient client, string baseUrl)
     {
+        private const string apiLoginPath = "/api/login";
+        private readonly HttpClient _client = client;
+        private readonly string _baseUrl = baseUrl;
 
-        private readonly HttpClient _client;
-        private readonly string _baseUrl;
-
-        public AuthenticationService(HttpClient client, string baseUrl)
-        {
-            _client = client;
-            _baseUrl = baseUrl;
-        }
-
-        public async Task<LoginResponse?> AuthenticateUserAsync(string userName, string password)
+        public async Task<(LoginResponse?, string? errorMessage)> AuthenticateUserAsync(string userName, string password)
         {
             var credentials = new Credentials() { UserName = userName, Password = password };
             var json = JsonSerializer.Serialize(credentials);
@@ -24,23 +18,23 @@ namespace LoginApp.ConsoleClient.Services
 
             try
             {
-                var response = await _client.PostAsync(new Uri(_baseUrl + "api/login"), content);
+                var response = await _client.PostAsync(new Uri(_baseUrl + apiLoginPath), content);
 
                 if (response.IsSuccessStatusCode)
                 {
                     var responseBody = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<LoginResponse>(responseBody);
+                    return (JsonSerializer.Deserialize<LoginResponse>(responseBody), null);
                 }
                 else
                 {
-                    Console.WriteLine($"Failed to authenticate. Status code: {response.StatusCode}");
+                    var errorContent = await response.Content.ReadAsStringAsync();                    
+                    return (null, $"Reason phrase: {response.ReasonPhrase} {errorContent}");
                 }
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine($"Message :{e.Message}");
-            }
-            return null;
+                return (null, e.Message);
+            }            
         }
 
     }    

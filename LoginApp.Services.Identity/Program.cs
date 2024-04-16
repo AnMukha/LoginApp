@@ -1,30 +1,17 @@
+using LoginApp.RestServicesCore;
 using LoginApp.Services.Identity.Infrastructure;
+using LoginApp.Services.Identity.Interfaces;
+using LoginApp.Services.Identity.Repositories;
+using LoginApp.Services.Identity.Services;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
+var service = new RestServicesCore(args);
 
-builder.Services.AddControllers();
-
-builder.Services.AddDbContext<IdentityDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+service.Start<Program>(builder =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    builder.Services.AddDbContext<IdentityDbContext>(options =>
+        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    builder.Services.AddTransient<ILoginService, LoginService>();
+    builder.Services.AddTransient<IUsersRepository, UsersRepository>();
+});
 
-// app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

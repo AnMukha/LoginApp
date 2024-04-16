@@ -7,7 +7,7 @@
         public static string GetBaseURL(string[] args)
         {
 #if DEBUG
-            if (args.Any())
+            if (args.Length != 0)
             {
                 Console.WriteLine($"Builded in Debug Mode. Base URL: {args[0]}");
                 return args[0];
